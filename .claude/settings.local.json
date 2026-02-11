@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(taskkill:*)",
+      "Bash(npx vite build:*)",
+      "Bash(python:*)",
+      "Bash(npx tsc:*)",
+      "Bash(wc:*)",
+      "Bash(python3:*)",
+      "Bash(xargs:*)",
+      "Bash(robocopy:*)",
+      "Bash(xcopy \"c:\\\\Users\\\\iccia\\\\code\\\\Umrah-Tayyib\" \"c:\\\\Users\\\\iccia\\\\code\\\\event-tayyib\"\" /E /I /Y /EXCLUDE:c:\\\\Users\\\\iccia\\\\code\\\\xcopy_exclude.txt 2>&1 || echo \"trying mkdir first\" && mkdir \"c:Usersicciacodeevent-tayyib\" 2>nul && xcopy \"c:UsersicciacodeUmrah-Tayyib\" \"c:Usersicciacodeevent-tayyib\"\" /E /I /Y)",
+      "Bash(powershell -Command \"Copy-Item -Path ''c:\\\\Users\\\\iccia\\\\code\\\\Umrah-Tayyib\\\\*'' -Destination ''c:\\\\Users\\\\iccia\\\\code\\\\event-tayyib'' -Recurse -Force -Exclude ''.git'' 2>&1\")",
+      "Bash(powershell -Command \"Remove-Item ''c:\\\\Users\\\\iccia\\\\code\\\\event-tayyib'' -Recurse -Force -ErrorAction SilentlyContinue; Copy-Item ''c:\\\\Users\\\\iccia\\\\code\\\\Umrah-Tayyib'' ''c:\\\\Users\\\\iccia\\\\code\\\\event-tayyib'' -Recurse -Force -Exclude ''.git''\")",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell -File -:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

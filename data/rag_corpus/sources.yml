@@ -1,0 +1,150 @@
+sources:
+  # --- English (EN) ---
+  - id: moh_haram_guide_en
+    title: "Ministry of Hajj and Umrah - Al-Masjid Al-Haram Guide (EN)"
+    url_or_path: "data/rag_corpus/pdfs/EN-104-Haram-Guide.pdf"
+    lang: "EN"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_umrah_guide_en
+    title: "Ministry of Hajj and Umrah - Umrah Guide (EN)"
+    url_or_path: "data/rag_corpus/pdfs/EN-105-Umrah-Guide.pdf"
+    lang: "EN"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_nabwi_guide_en
+    title: "Ministry of Hajj and Umrah - Al-Masjid An-Nabawi Guide (EN)"
+    url_or_path: "data/rag_corpus/pdfs/EN-107-Nabwi-Guide.pdf"
+    lang: "EN"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_ihram_guide_en
+    title: "Ministry of Hajj and Umrah - Ihram Guide (EN)"
+    url_or_path: "data/rag_corpus/pdfs/EN-110-Ihram-Guide.pdf"
+    lang: "EN"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_umrah_visit_en
+    title: "Ministry of Hajj and Umrah - Umrah and Visit Guide (EN)"
+    url_or_path: "data/rag_corpus/pdfs/EN-117-Umrah-Visit.pdf"
+    lang: "EN"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: rawdah_faq_en
+    title: "Rawdah FAQ (EN) - curated text"
+    url_or_path: "data/rag_corpus/texts/Rawdah_FAQ_EN.txt"
+    source_url: "https://www.nusuk.sa/rawdah"
+    lang: "EN"
+    type: "txt"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  # --- Arabic (AR) ---
+  - id: moh_haram_guide_ar
+    title: "وزارة الحج والعمرة - دليل المسجد الحرام (AR)"
+    url_or_path: "data/rag_corpus/pdfs/AR-104-Haram-Guide.pdf"
+    lang: "AR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_umrah_guide_ar
+    title: "وزارة الحج والعمرة - دليل العمرة (AR)"
+    url_or_path: "data/rag_corpus/pdfs/AR-105-Umrah-Guide.pdf"
+    lang: "AR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_nabwi_guide_ar
+    title: "وزارة الحج والعمرة - دليل المسجد النبوي (AR)"
+    url_or_path: "data/rag_corpus/pdfs/AR-107-Nabwi-Guide.pdf"
+    lang: "AR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_ihram_guide_ar
+    title: "وزارة الحج والعمرة - دليل الإحرام (AR)"
+    url_or_path: "data/rag_corpus/pdfs/AR-110-Ihram-Guide.pdf"
+    lang: "AR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_umrah_visit_ar
+    title: "وزارة الحج والعمرة - دليل العمرة والزيارة (AR)"
+    url_or_path: "data/rag_corpus/pdfs/AR-117-Umrah-Visit.pdf"
+    lang: "AR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: rawdah_faq_ar
+    title: "أسئلة شائعة عن الروضة (AR) - نص منسق"
+    url_or_path: "data/rag_corpus/texts/Rawdah_FAQ_AR.txt"
+    source_url: "https://www.nusuk.sa/rawdah"
+    lang: "AR"
+    type: "txt"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  # --- French (FR) ---
+  - id: moh_haram_guide_fr
+    title: "Ministere du Hajj et de la Omra - Guide d'Al-Masjid Al-Haram (FR)"
+    url_or_path: "data/rag_corpus/pdfs/FR-104-Haram-Guide.pdf"
+    lang: "FR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_umrah_guide_fr
+    title: "Ministere du Hajj et de la Omra - Guide de la Omra (FR)"
+    url_or_path: "data/rag_corpus/pdfs/FR-105-Umrah-Guide.pdf"
+    lang: "FR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_nabwi_guide_fr
+    title: "Ministere du Hajj et de la Omra - Guide d'Al-Masjid An-Nabawi (FR)"
+    url_or_path: "data/rag_corpus/pdfs/FR-107-Nabwi-Guide.pdf"
+    lang: "FR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_ihram_guide_fr
+    title: "Ministere du Hajj et de la Omra - Guide de l'Ihram (FR)"
+    url_or_path: "data/rag_corpus/pdfs/FR-110-Ihram-Guide.pdf"
+    lang: "FR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: moh_umrah_visit_fr
+    title: "Ministere du Hajj et de la Omra - Guide Omra et Visite (FR)"
+    url_or_path: "data/rag_corpus/pdfs/FR-117-Umrah-Visit.pdf"
+    lang: "FR"
+    type: "pdf"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"
+
+  - id: rawdah_faq_fr
+    title: "FAQ Rawdah (FR) - texte structure"
+    url_or_path: "data/rag_corpus/texts/Rawdah_FAQ_FR.txt"
+    source_url: "https://www.nusuk.sa/rawdah"
+    lang: "FR"
+    type: "txt"
+    approved_by: "ICCD stakeholder"
+    approved_date: "TBD"

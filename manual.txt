@@ -1,0 +1,17 @@
+Backend (PowerShell)
+
+cd C:\Users\iccia\code\Umrah-Tayyib\apps\kiosk-backend
+.\.venv\Scripts\activate
+python -m uvicorn app.main:app --reload --port 8005 --env-file C:\Users\iccia\code\Umrah-Tayyib\.env
+Frontend (PowerShell)
+
+cd C:\Users\iccia\code\Umrah-Tayyib\apps\kiosk-frontend
+npm install
+npm run dev -- --port 5175
+Localhost URLs
+
+Frontend: http://localhost:5175
+Backend health: http://127.0.0.1:8005/api/health
+RAG test: http://127.0.0.1:8005/api/rag_test
+
+powershell -NoExit -ExecutionPolicy Bypass -File "C:\Users\iccia\code\Umrah-Tayyib\dev.ps1"

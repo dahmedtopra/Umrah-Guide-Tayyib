@@ -1,0 +1,1274 @@
+[
+  {
+    "id": "en-umrah-steps-1",
+    "lang": "EN",
+    "question_variants": [
+      "What are the steps of Umrah?",
+      "Umrah steps",
+      "How to perform Umrah"
+    ],
+    "answer": {
+      "direct": "Umrah includes entering ihram, tawaf, sa'i, and exit from ihram.",
+      "steps": [
+        "Enter ihram before the miqat",
+        "Perform tawaf around the Kaaba",
+        "Perform sa'i between Safa and Marwah",
+        "Shave or trim hair to exit ihram"
+      ],
+      "mistakes": [
+        "Skipping miqat",
+        "Starting tawaf without proper ihram"
+      ]
+    },
+    "tags": [
+      "umrah",
+      "steps",
+      "ihram",
+      "tawaf",
+      "sai"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-miqat-1",
+    "lang": "EN",
+    "question_variants": [
+      "What is miqat?",
+      "Miqat by air",
+      "Miqat rules"
+    ],
+    "answer": {
+      "direct": "Miqat is the boundary where pilgrims must enter ihram before proceeding to Makkah.",
+      "steps": [
+        "Identify your miqat based on route",
+        "Enter ihram before crossing miqat"
+      ],
+      "mistakes": [
+        "Crossing miqat without ihram"
+      ]
+    },
+    "tags": [
+      "miqat",
+      "ihram"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_en"
+    ]
+  },
+  {
+    "id": "en-nusuk-1",
+    "lang": "EN",
+    "question_variants": [
+      "How do I get a Nusuk permit?",
+      "Nusuk permit basics",
+      "Nusuk app steps"
+    ],
+    "answer": {
+      "direct": "Permits are managed through the Nusuk app (????? ???).",
+      "steps": [
+        "Install the Nusuk app",
+        "Create or access your account",
+        "Select your permit type and follow prompts"
+      ],
+      "mistakes": [
+        "Assuming a permit is automatic"
+      ]
+    },
+    "tags": [
+      "nusuk",
+      "permits"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_visit_en",
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-rawdah-1",
+    "lang": "EN",
+    "question_variants": [
+      "How to visit Rawdah?",
+      "Rawdah permit",
+      "Rawdah basics"
+    ],
+    "answer": {
+      "direct": "Rawdah visits require a permit and time slot, usually via the Nusuk app.",
+      "steps": [
+        "Open the Nusuk app",
+        "Choose Rawdah visit",
+        "Select an available time slot"
+      ],
+      "mistakes": [
+        "Arriving without a permit"
+      ]
+    },
+    "tags": [
+      "rawdah",
+      "permits"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "rawdah_faq_en"
+    ]
+  },
+  {
+    "id": "en-mistakes-1",
+    "lang": "EN",
+    "question_variants": [
+      "Common mistakes in Umrah",
+      "Umrah mistakes",
+      "Mistakes during tawaf"
+    ],
+    "answer": {
+      "direct": "Common mistakes include crossing miqat without ihram or skipping required steps.",
+      "steps": [
+        "Review your sequence before starting",
+        "Ask for clarification if unsure"
+      ],
+      "mistakes": [
+        "Skipping miqat",
+        "Incorrect tawaf count"
+      ]
+    },
+    "tags": [
+      "mistakes",
+      "tawaf"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en",
+      "moh_umrah_visit_en"
+    ]
+  },
+  {
+    "id": "en-ihram-1",
+    "lang": "EN",
+    "question_variants": [
+      "What is ihram?",
+      "Ihram rules",
+      "When to enter ihram"
+    ],
+    "answer": {
+      "direct": "Ihram is the sacred state entered before Umrah, with specific intentions and attire.",
+      "steps": [
+        "Make intention",
+        "Wear proper ihram attire",
+        "Avoid prohibited acts"
+      ],
+      "mistakes": [
+        "Entering ihram after miqat"
+      ]
+    },
+    "tags": [
+      "ihram"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_en",
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-tawaf-1",
+    "lang": "EN",
+    "question_variants": [
+      "How many rounds in tawaf?",
+      "Tawaf steps",
+      "Tawaf basics"
+    ],
+    "answer": {
+      "direct": "Tawaf is seven complete circuits around the Kaaba.",
+      "steps": [
+        "Start at the Black Stone line",
+        "Complete seven circuits"
+      ],
+      "mistakes": [
+        "Doing fewer than seven rounds"
+      ]
+    },
+    "tags": [
+      "tawaf"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en",
+      "moh_umrah_visit_en"
+    ]
+  },
+  {
+    "id": "en-sai-1",
+    "lang": "EN",
+    "question_variants": [
+      "What is sa'i?",
+      "Sa'i steps",
+      "Safa and Marwah"
+    ],
+    "answer": {
+      "direct": "Sa'i is walking seven times between Safa and Marwah.",
+      "steps": [
+        "Start at Safa",
+        "Walk to Marwah",
+        "Complete seven traversals"
+      ],
+      "mistakes": [
+        "Losing count of rounds"
+      ]
+    },
+    "tags": [
+      "sai"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en",
+      "moh_umrah_visit_en"
+    ]
+  },
+  {
+    "id": "en-miqat-2",
+    "lang": "EN",
+    "question_variants": [
+      "Which miqat applies to me?",
+      "Miqat locations",
+      "Miqat boundary"
+    ],
+    "answer": {
+      "direct": "Your miqat depends on your travel route; enter ihram before crossing it.",
+      "steps": [
+        "Check your route",
+        "Enter ihram before crossing"
+      ],
+      "mistakes": [
+        "Assuming airport arrival is miqat"
+      ]
+    },
+    "tags": [
+      "miqat"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_en",
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-nusuk-2",
+    "lang": "EN",
+    "question_variants": [
+      "Nusuk app not working",
+      "Nusuk login help",
+      "Nusuk issues"
+    ],
+    "answer": {
+      "direct": "If the Nusuk app has issues, try again later or seek official support.",
+      "steps": [
+        "Check app updates",
+        "Retry at a different time"
+      ],
+      "mistakes": [
+        "Sharing personal credentials"
+      ]
+    },
+    "tags": [
+      "nusuk",
+      "support"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_visit_en",
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-rawdah-2",
+    "lang": "EN",
+    "question_variants": [
+      "Rawdah time slot",
+      "Rawdah schedule",
+      "When to visit Rawdah"
+    ],
+    "answer": {
+      "direct": "Choose a Rawdah time slot in the Nusuk app and arrive on time.",
+      "steps": [
+        "Select slot",
+        "Arrive early"
+      ],
+      "mistakes": [
+        "Missing your slot"
+      ]
+    },
+    "tags": [
+      "rawdah"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "rawdah_faq_en",
+      "moh_nabwi_guide_en"
+    ]
+  },
+  {
+    "id": "en-umrah-steps-2",
+    "lang": "EN",
+    "question_variants": [
+      "Umrah order",
+      "Sequence of Umrah",
+      "Umrah checklist"
+    ],
+    "answer": {
+      "direct": "The sequence is ihram, tawaf, sa'i, then exit ihram.",
+      "steps": [
+        "Ihram",
+        "Tawaf",
+        "Sa'i",
+        "Exit ihram"
+      ],
+      "mistakes": [
+        "Skipping sa'i"
+      ]
+    },
+    "tags": [
+      "umrah",
+      "sequence"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-ihram-2",
+    "lang": "EN",
+    "question_variants": [
+      "What is prohibited in ihram?",
+      "Ihram restrictions",
+      "Ihram rules list"
+    ],
+    "answer": {
+      "direct": "In ihram, avoid prohibited actions such as cutting hair or using perfumes.",
+      "steps": [
+        "Review restrictions",
+        "Maintain the state until completion"
+      ],
+      "mistakes": [
+        "Breaking ihram inadvertently"
+      ]
+    },
+    "tags": [
+      "ihram",
+      "rules"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_en",
+      "moh_umrah_guide_en"
+    ]
+  },
+  {
+    "id": "en-tawaf-2",
+    "lang": "EN",
+    "question_variants": [
+      "Tawaf and prayer",
+      "After tawaf what to do",
+      "Tawaf dua"
+    ],
+    "answer": {
+      "direct": "After tawaf, you may pray two rak'ahs if possible.",
+      "steps": [
+        "Complete seven rounds",
+        "Pray two rak'ahs if able"
+      ],
+      "mistakes": [
+        "Blocking pathways"
+      ]
+    },
+    "tags": [
+      "tawaf",
+      "prayer"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en",
+      "moh_umrah_visit_en"
+    ]
+  },
+  {
+    "id": "en-sai-2",
+    "lang": "EN",
+    "question_variants": [
+      "Sa'i after tawaf",
+      "Order of sa'i",
+      "When to do sa'i"
+    ],
+    "answer": {
+      "direct": "Sa'i is done after tawaf.",
+      "steps": [
+        "Complete tawaf",
+        "Proceed to Safa for sa'i"
+      ],
+      "mistakes": [
+        "Starting sa'i before tawaf"
+      ]
+    },
+    "tags": [
+      "sai",
+      "order"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_en",
+      "moh_umrah_visit_en"
+    ]
+  },
+  {
+    "id": "ar-umrah-steps-1",
+    "lang": "AR",
+    "question_variants": [
+      "?? ????? ???????",
+      "????? ??????",
+      "????? ???? ??????"
+    ],
+    "answer": {
+      "direct": "?????? ???? ??????? ??????? ?????? ?? ??????.",
+      "steps": [
+        "?????? ?? ??????? ??? ???????",
+        "?????? ??? ??????",
+        "????? ??? ????? ???????",
+        "?????? ?????? ?? ???????"
+      ],
+      "mistakes": [
+        "????? ??????? ??? ?????",
+        "??? ?????? ??? ????? ????"
+      ]
+    },
+    "tags": [
+      "????",
+      "?????",
+      "???????",
+      "??????",
+      "?????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-miqat-1",
+    "lang": "AR",
+    "question_variants": [
+      "?? ?? ????????",
+      "??????? ????",
+      "????? ???????"
+    ],
+    "answer": {
+      "direct": "??????? ?? ???? ???? ??? ???? ??????? ??? ???? ???.",
+      "steps": [
+        "????? ?????? ??? ??????",
+        "??????? ??? ????? ???????"
+      ],
+      "mistakes": [
+        "????? ??????? ??? ?????"
+      ]
+    },
+    "tags": [
+      "???????",
+      "???????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-nusuk-1",
+    "lang": "AR",
+    "question_variants": [
+      "??? ???? ??? ????? ????",
+      "????? ???",
+      "????? ????? ???"
+    ],
+    "answer": {
+      "direct": "???????? ??? ??? ????? ???.",
+      "steps": [
+        "????? ????? ???",
+        "????? ?????? ?? ????? ????",
+        "?????? ??? ???????"
+      ],
+      "mistakes": [
+        "?????? ?? ??????? ??????"
+      ]
+    },
+    "tags": [
+      "???",
+      "??????",
+      "????? ???"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-rawdah-1",
+    "lang": "AR",
+    "question_variants": [
+      "??? ???? ?????? ????????",
+      "????? ?????? ???????",
+      "??????? ??????"
+    ],
+    "answer": {
+      "direct": "????? ?????? ??????? ????? ??????? ??????? ??? ????? ???.",
+      "steps": [
+        "??? ????? ???",
+        "?????? ????? ?????? ???????",
+        "????? ?????? ??????"
+      ],
+      "mistakes": [
+        "?????? ??? ?????"
+      ]
+    },
+    "tags": [
+      "?????? ???????",
+      "??????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "rawdah_faq_ar"
+    ]
+  },
+  {
+    "id": "ar-mistakes-1",
+    "lang": "AR",
+    "question_variants": [
+      "????? ????? ?? ??????",
+      "????? ??????",
+      "????? ????? ??????"
+    ],
+    "answer": {
+      "direct": "?? ??????? ??????? ????? ??????? ??? ????? ?? ??? ???? ?????.",
+      "steps": [
+        "?????? ??????? ??? ?????",
+        "??? ??????? ??? ??????"
+      ],
+      "mistakes": [
+        "????? ???????",
+        "??? ????? ?????? ??? ????"
+      ]
+    },
+    "tags": [
+      "?????",
+      "??????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar",
+      "moh_umrah_visit_ar"
+    ]
+  },
+  {
+    "id": "ar-ihram-1",
+    "lang": "AR",
+    "question_variants": [
+      "?? ?? ????????",
+      "????? ???????",
+      "??? ???? ???????"
+    ],
+    "answer": {
+      "direct": "??????? ?? ?????? ?? ????? ???? ????? ?????.",
+      "steps": [
+        "?????",
+        "??? ???? ???????",
+        "?????? ?????????"
+      ],
+      "mistakes": [
+        "?????? ?? ??????? ??? ???????"
+      ]
+    },
+    "tags": [
+      "???????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_ar",
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-tawaf-1",
+    "lang": "AR",
+    "question_variants": [
+      "?? ??? ?? ???????",
+      "????? ??????",
+      "??????? ??????"
+    ],
+    "answer": {
+      "direct": "?????? ???? ????? ????? ??? ??????.",
+      "steps": [
+        "????? ?? ?????? ????? ??????",
+        "????? ???? ?????"
+      ],
+      "mistakes": [
+        "????? ??? ???????"
+      ]
+    },
+    "tags": [
+      "??????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar",
+      "moh_umrah_visit_ar"
+    ]
+  },
+  {
+    "id": "ar-sai-1",
+    "lang": "AR",
+    "question_variants": [
+      "?? ?? ??????",
+      "????? ?????",
+      "????? ???????"
+    ],
+    "answer": {
+      "direct": "????? ???? ????? ??? ????? ???????.",
+      "steps": [
+        "????? ?? ?????",
+        "?????? ??? ??????",
+        "????? ???? ?????"
+      ],
+      "mistakes": [
+        "????? ?? ??? ???????"
+      ]
+    },
+    "tags": [
+      "?????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar",
+      "moh_umrah_visit_ar"
+    ]
+  },
+  {
+    "id": "ar-miqat-2",
+    "lang": "AR",
+    "question_variants": [
+      "?? ????? ???",
+      "????? ???????",
+      "???? ???????"
+    ],
+    "answer": {
+      "direct": "??????? ????? ??? ???? ????? ???? ??????? ????.",
+      "steps": [
+        "????? ?????",
+        "??????? ??? ????? ???????"
+      ],
+      "mistakes": [
+        "?????? ?????? ??? ?????? ?? ???????"
+      ]
+    },
+    "tags": [
+      "???????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_ar",
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-nusuk-2",
+    "lang": "AR",
+    "question_variants": [
+      "????? ????? ???",
+      "???? ????? ???",
+      "????? ?? ???"
+    ],
+    "answer": {
+      "direct": "??? ????? ????? ?? ????? ??? ????? ?????? ?? ????? ?? ????? ??????.",
+      "steps": [
+        "????? ???????",
+        "????? ???????? ??????"
+      ],
+      "mistakes": [
+        "?????? ?????? ??????"
+      ]
+    },
+    "tags": [
+      "???",
+      "???",
+      "????? ???"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_visit_ar",
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-rawdah-2",
+    "lang": "AR",
+    "question_variants": [
+      "???? ?????? ???????",
+      "????? ??????",
+      "????? ?????? ???????"
+    ],
+    "answer": {
+      "direct": "???? ?????? ?? ????? ??? ????? ?? ????? ??????.",
+      "steps": [
+        "?????? ???? ?????",
+        "?????? ??????"
+      ],
+      "mistakes": [
+        "???? ?? ??????"
+      ]
+    },
+    "tags": [
+      "?????? ???????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "rawdah_faq_ar",
+      "moh_nabwi_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-umrah-steps-2",
+    "lang": "AR",
+    "question_variants": [
+      "????? ??????",
+      "????? ??????",
+      "????? ??????"
+    ],
+    "answer": {
+      "direct": "???????: ??????? ?? ?????? ?? ????? ?? ??????.",
+      "steps": [
+        "???????",
+        "??????",
+        "?????",
+        "??????"
+      ],
+      "mistakes": [
+        "??? ?????"
+      ]
+    },
+    "tags": [
+      "????",
+      "?????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-ihram-2",
+    "lang": "AR",
+    "question_variants": [
+      "??????? ???????",
+      "???? ???????",
+      "????? ??????? ???????"
+    ],
+    "answer": {
+      "direct": "?? ??????? ??? ?????? ????????? ??? ?? ????? ?? ??????? ?????.",
+      "steps": [
+        "????? ?????????",
+        "?????? ??? ??????? ??? ????????"
+      ],
+      "mistakes": [
+        "??? ??????? ??? ???"
+      ]
+    },
+    "tags": [
+      "???????",
+      "???????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_ar",
+      "moh_umrah_guide_ar"
+    ]
+  },
+  {
+    "id": "ar-tawaf-2",
+    "lang": "AR",
+    "question_variants": [
+      "??? ?????? ???? ?????",
+      "???? ??? ??????",
+      "????? ??????"
+    ],
+    "answer": {
+      "direct": "??? ?????? ??????? ?????? ?? ????.",
+      "steps": [
+        "????? ???? ?????",
+        "???? ?????? ?? ????"
+      ],
+      "mistakes": [
+        "????? ????????"
+      ]
+    },
+    "tags": [
+      "??????",
+      "????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar",
+      "moh_umrah_visit_ar"
+    ]
+  },
+  {
+    "id": "ar-sai-2",
+    "lang": "AR",
+    "question_variants": [
+      "????? ??? ??????",
+      "????? ?????",
+      "??? ?????"
+    ],
+    "answer": {
+      "direct": "????? ???? ??? ??????.",
+      "steps": [
+        "????? ??????",
+        "?????? ??? ????? ?????"
+      ],
+      "mistakes": [
+        "??? ????? ??? ??????"
+      ]
+    },
+    "tags": [
+      "?????",
+      "?????"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_ar",
+      "moh_umrah_visit_ar"
+    ]
+  },
+  {
+    "id": "fr-umrah-steps-1",
+    "lang": "FR",
+    "question_variants": [
+      "Quelles sont les etapes de la Omra?",
+      "Etapes de la Omra",
+      "Comment faire la Omra"
+    ],
+    "answer": {
+      "direct": "La Omra comprend l'ihram, le tawaf, le sa'i, puis la sortie de l'ihram.",
+      "steps": [
+        "Entrer en ihram avant le miqat",
+        "Faire le tawaf",
+        "Faire le sa'i entre Safa et Marwah",
+        "Sortir de l'ihram"
+      ],
+      "mistakes": [
+        "Passer le miqat sans ihram",
+        "Commencer le tawaf sans ihram"
+      ]
+    },
+    "tags": [
+      "omra",
+      "etapes",
+      "ihram",
+      "tawaf",
+      "sai"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-miqat-1",
+    "lang": "FR",
+    "question_variants": [
+      "Qu'est-ce que le miqat?",
+      "Miqat en avion",
+      "Regles du miqat"
+    ],
+    "answer": {
+      "direct": "Le miqat est la limite ou l'on doit entrer en ihram avant Makkah.",
+      "steps": [
+        "Identifier votre miqat",
+        "Entrer en ihram avant de le franchir"
+      ],
+      "mistakes": [
+        "Franchir le miqat sans ihram"
+      ]
+    },
+    "tags": [
+      "miqat",
+      "ihram"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-nusuk-1",
+    "lang": "FR",
+    "question_variants": [
+      "Comment obtenir un permis Nusuk?",
+      "Permis Nusuk",
+      "Application Nusuk"
+    ],
+    "answer": {
+      "direct": "Les permis se gerent via l'application Nusuk (????? ???).",
+      "steps": [
+        "Installer l'application Nusuk",
+        "Se connecter ou creer un compte",
+        "Choisir le type de permis"
+      ],
+      "mistakes": [
+        "Penser que le permis est automatique"
+      ]
+    },
+    "tags": [
+      "nusuk",
+      "permis"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-rawdah-1",
+    "lang": "FR",
+    "question_variants": [
+      "Visiter la Rawdah",
+      "Permis Rawdah",
+      "Rawdah basics"
+    ],
+    "answer": {
+      "direct": "La visite de la Rawdah necessite un permis et un horaire via Nusuk.",
+      "steps": [
+        "Ouvrir l'app Nusuk",
+        "Choisir la visite Rawdah",
+        "Selectionner un horaire"
+      ],
+      "mistakes": [
+        "Venir sans permis"
+      ]
+    },
+    "tags": [
+      "rawdah",
+      "permis"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "rawdah_faq_fr"
+    ]
+  },
+  {
+    "id": "fr-mistakes-1",
+    "lang": "FR",
+    "question_variants": [
+      "Erreurs courantes en Omra",
+      "Erreurs Omra",
+      "Erreurs pendant le tawaf"
+    ],
+    "answer": {
+      "direct": "Erreurs courantes: franchir le miqat sans ihram ou sauter une etape.",
+      "steps": [
+        "Verifier la sequence",
+        "Demander de l'aide si besoin"
+      ],
+      "mistakes": [
+        "Franchir le miqat",
+        "Nombre de tours incorrect"
+      ]
+    },
+    "tags": [
+      "erreurs",
+      "tawaf"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr",
+      "moh_umrah_visit_fr"
+    ]
+  },
+  {
+    "id": "fr-ihram-1",
+    "lang": "FR",
+    "question_variants": [
+      "Qu'est-ce que l'ihram?",
+      "Regles de l'ihram",
+      "Quand entrer en ihram"
+    ],
+    "answer": {
+      "direct": "L'ihram est l'etat sacre avec intention et tenue specifique.",
+      "steps": [
+        "Formuler l'intention",
+        "Porter la tenue d'ihram",
+        "Eviter les interdits"
+      ],
+      "mistakes": [
+        "Entrer en ihram apres le miqat"
+      ]
+    },
+    "tags": [
+      "ihram"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_fr",
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-tawaf-1",
+    "lang": "FR",
+    "question_variants": [
+      "Combien de tours pour le tawaf?",
+      "Etapes du tawaf",
+      "Tawaf basics"
+    ],
+    "answer": {
+      "direct": "Le tawaf est de sept tours complets autour de la Kaaba.",
+      "steps": [
+        "Commencer a la Pierre Noire",
+        "Completer sept tours"
+      ],
+      "mistakes": [
+        "Faire moins de sept tours"
+      ]
+    },
+    "tags": [
+      "tawaf"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr",
+      "moh_umrah_visit_fr"
+    ]
+  },
+  {
+    "id": "fr-sai-1",
+    "lang": "FR",
+    "question_variants": [
+      "Qu'est-ce que le sa'i?",
+      "Etapes du sa'i",
+      "Safa et Marwah"
+    ],
+    "answer": {
+      "direct": "Le sa'i est sept allers entre Safa et Marwah.",
+      "steps": [
+        "Commencer a Safa",
+        "Aller a Marwah",
+        "Completer sept passages"
+      ],
+      "mistakes": [
+        "Perdre le compte"
+      ]
+    },
+    "tags": [
+      "sai"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr",
+      "moh_umrah_visit_fr"
+    ]
+  },
+  {
+    "id": "fr-miqat-2",
+    "lang": "FR",
+    "question_variants": [
+      "Quel miqat pour moi?",
+      "Lieux du miqat",
+      "Limites du miqat"
+    ],
+    "answer": {
+      "direct": "Le miqat depend de votre trajet; entrez en ihram avant de le franchir.",
+      "steps": [
+        "Verifier votre trajet",
+        "Entrer en ihram avant le miqat"
+      ],
+      "mistakes": [
+        "Penser que l'arrivee a l'aeroport est le miqat"
+      ]
+    },
+    "tags": [
+      "miqat"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_fr",
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-nusuk-2",
+    "lang": "FR",
+    "question_variants": [
+      "Probleme application Nusuk",
+      "Nusuk ne fonctionne pas",
+      "Aide Nusuk"
+    ],
+    "answer": {
+      "direct": "En cas de probleme, reessayez plus tard ou contactez le support officiel.",
+      "steps": [
+        "Verifier les mises a jour",
+        "Reessayer plus tard"
+      ],
+      "mistakes": [
+        "Partager vos identifiants"
+      ]
+    },
+    "tags": [
+      "nusuk",
+      "support"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_visit_fr",
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-rawdah-2",
+    "lang": "FR",
+    "question_variants": [
+      "Horaire Rawdah",
+      "Programme Rawdah",
+      "Quand visiter Rawdah"
+    ],
+    "answer": {
+      "direct": "Choisissez un horaire dans Nusuk et arrivez a l'heure.",
+      "steps": [
+        "Selectionner un horaire",
+        "Arriver en avance"
+      ],
+      "mistakes": [
+        "Rater votre horaire"
+      ]
+    },
+    "tags": [
+      "rawdah"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "rawdah_faq_fr",
+      "moh_nabwi_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-umrah-steps-2",
+    "lang": "FR",
+    "question_variants": [
+      "Ordre de la Omra",
+      "Sequence de la Omra",
+      "Checklist Omra"
+    ],
+    "answer": {
+      "direct": "Sequence: ihram, tawaf, sa'i, puis sortie de l'ihram.",
+      "steps": [
+        "Ihram",
+        "Tawaf",
+        "Sa'i",
+        "Sortie de l'ihram"
+      ],
+      "mistakes": [
+        "Sauter le sa'i"
+      ]
+    },
+    "tags": [
+      "omra",
+      "sequence"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-ihram-2",
+    "lang": "FR",
+    "question_variants": [
+      "Interdits de l'ihram",
+      "Restrictions ihram",
+      "Liste ihram"
+    ],
+    "answer": {
+      "direct": "En ihram, evitez les interdits comme couper les cheveux ou utiliser du parfum.",
+      "steps": [
+        "Connaitre les interdits",
+        "Rester en ihram jusqu'a la fin"
+      ],
+      "mistakes": [
+        "Rompre l'ihram par erreur"
+      ]
+    },
+    "tags": [
+      "ihram",
+      "regles"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_ihram_guide_fr",
+      "moh_umrah_guide_fr"
+    ]
+  },
+  {
+    "id": "fr-tawaf-2",
+    "lang": "FR",
+    "question_variants": [
+      "Apres le tawaf",
+      "Priere apres tawaf",
+      "Dua tawaf"
+    ],
+    "answer": {
+      "direct": "Apres le tawaf, vous pouvez prier deux rak'ahs si possible.",
+      "steps": [
+        "Completer sept tours",
+        "Prier deux rak'ahs si possible"
+      ],
+      "mistakes": [
+        "Bloquer les passages"
+      ]
+    },
+    "tags": [
+      "tawaf",
+      "priere"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr",
+      "moh_umrah_visit_fr"
+    ]
+  },
+  {
+    "id": "fr-sai-2",
+    "lang": "FR",
+    "question_variants": [
+      "Sa'i apres tawaf",
+      "Ordre du sa'i",
+      "Quand faire le sa'i"
+    ],
+    "answer": {
+      "direct": "Le sa'i se fait apres le tawaf.",
+      "steps": [
+        "Completer le tawaf",
+        "Aller a Safa pour le sa'i"
+      ],
+      "mistakes": [
+        "Commencer le sa'i avant le tawaf"
+      ]
+    },
+    "tags": [
+      "sai",
+      "ordre"
+    ],
+    "last_updated": "2026-01-27T00:00:00Z",
+    "source_ids": [
+      "moh_umrah_guide_fr",
+      "moh_umrah_visit_fr"
+    ]
+  }
+]
