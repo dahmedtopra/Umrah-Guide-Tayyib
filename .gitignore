@@ -2,18 +2,36 @@
 node_modules/
 dist/
 build/
+*.tsbuildinfo
 
 # Python
 __pycache__/
 *.pyc
 .venv/
+venv/
+env/
 
-# Env
+# Environment files
 .env
+.env.*
+!.env.example
+!**/.env.example
 
-# Data / artifacts
+# Logs and local caches
+*.log
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+apps/kiosk-frontend/.vite/
+apps/kiosk-frontend/.env.local
+apps/kiosk-backend/.env.local
+.claude/skills/
+.agents/skills/github/
+
+# Data / artifacts (generated locally)
 data/*.sqlite
 data/chroma_index/
+data/rag_corpus/cache/
 
 # OS
 .DS_Store

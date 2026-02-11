@@ -1,0 +1,10 @@
+# Copy this file to .github/CODEOWNERS and adjust owners.
+
+* @dtopra
+
+/apps/kiosk-frontend/ @dtopra
+/apps/kiosk-backend/ @dtopra
+/data/ @dtopra
+/docs/ @dtopra
+/scripts/ @dtopra
+

@@ -1,35 +1,29 @@
 # ICHS Umrah AI Search Kiosk
 
-Monorepo for the kiosk frontend and backend.
+Production-oriented kiosk monorepo for Umrah guidance.
 
-## Repo Layout
-- `apps/kiosk-frontend` - React + Vite + TypeScript + Tailwind
-- `apps/kiosk-backend` - FastAPI + Uvicorn
-- `data/offline_pack` - offline answer pack
-- `data/rag_corpus` - approved corpus and source registry
-- `data/chroma_index` - local Chroma index
-- `assets` - branding and Tayyib media assets
-- `scripts` - ingestion and validation utilities
+## Stack
+- Frontend: React + Vite + TypeScript + TailwindCSS
+- Backend: FastAPI + Uvicorn (Python 3.11)
+- Retrieval: local Chroma index
+- Analytics: local SQLite
+- Models: OpenAI Responses (`gpt-4o`) and embeddings (`text-embedding-3-large`)
 
-## Environment Files
-- Root `.env.example` - shared local defaults.
-- Root `.env` - optional shared local values.
-- `apps/kiosk-frontend/.env.example` - frontend vars (`VITE_API_BASE_URL`).
-- `apps/kiosk-backend/.env.example` - backend vars (OpenAI, DB, Chroma, runtime mode).
-- `apps/kiosk-backend/.env` - backend local overrides (not committed with secrets).
+## Repository Structure
+- `apps/kiosk-frontend` frontend app
+- `apps/kiosk-backend` backend API
+- `data/offline_pack` offline Q&A dataset
+- `data/rag_corpus` approved source registry and corpus files
+- `data/chroma_index` local vector index (generated, not committed)
+- `assets` branding and avatar media
+- `scripts` ingestion and integrity checks
+- `docs` product and workflow documentation
 
-Required backend variables:
-- `OPENAI_API_KEY`
-- `OPENAI_MODEL` (default `gpt-4o`)
-- `OPENAI_EMBED_MODEL` (default `text-embedding-3-large`)
-- `ALLOWED_ORIGINS` (for frontend dev URL)
+## Prerequisites
+- Node.js 20+
+- Python 3.11+
 
-Important optional runtime flags:
-- `KIOSK_DEV_MODE=1` enables `/api/diag`
-- `EVENT_MODE=true` reduces verbose logging and disables dev-only behavior
-- `CHROMA_TELEMETRY=false` disables Chroma telemetry
-
-## Local Development
+## Local Setup (Windows PowerShell)
 Backend:
 ```powershell
 cd apps/kiosk-backend
@@ -46,53 +40,57 @@ npm install
 npm run dev -- --port 5175
 ```
 
-URLs:
+Endpoints:
 - Frontend: `http://localhost:5175`
-- Backend health: `http://127.0.0.1:8005/api/health`
+- Health: `http://127.0.0.1:8005/api/health`
 - RAG test: `http://127.0.0.1:8005/api/rag_test`
 - Version: `http://127.0.0.1:8005/api/version`
 
-Optional one-command launcher:
-```powershell
-powershell -NoExit -ExecutionPolicy Bypass -File .\dev.ps1
-```
+## Environment Files
+- Root `.env.example`: shared defaults template
+- Root `.env`: local secrets and overrides (ignored)
+- `apps/kiosk-frontend/.env.example`: frontend env template
+- `apps/kiosk-backend/.env.example`: backend env template
+- `apps/kiosk-backend/.env`: optional backend-local overrides (ignored)
 
-## Offline Pack Integrity
-Validate that every offline entry has valid `source_ids`:
+Core backend variables:
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL` (default `gpt-4o`)
+- `OPENAI_EMBED_MODEL` (default `text-embedding-3-large`)
+- `ALLOWED_ORIGINS` (CSV)
+
+Optional runtime flags:
+- `KIOSK_DEV_MODE=1` enables dev diagnostics endpoints
+- `EVENT_MODE=true` reduces verbose runtime logging
+- `CHROMA_TELEMETRY=false` disables Chroma telemetry
+
+## Checks
+Offline source integrity:
 ```powershell
 python scripts/check_offline_integrity.py
 ```
 
-## RAG Ingestion
-Run from repo root:
+Frontend build:
 ```powershell
-python scripts/ingest_sources.py --reset --max-sources 1 --max-pages 5
+cd apps/kiosk-frontend
+npm run build
 ```
 
-Useful flags:
-- `--max-sources`
-- `--max-pages`
-- `--chunk-chars`
-- `--overlap-chars`
-- `--batch-size`
-- `--cache-dir`
-- `--refresh`
-- `--reset`
-- `--reset-cache`
-
-## UI and Event Readiness Checks
+Backend compile smoke:
 ```powershell
-python .agents/skills/kiosk-ui-qa/scripts/run_checks.py
-python .agents/skills/event-readiness-checklist/scripts/run_checklist.py
+python -m compileall apps/kiosk-backend/app
 ```
+
+## CI
+GitHub Actions runs:
+- Frontend install + build
+- Backend dependency install + compile smoke
+- Offline integrity check
 
 ## Security Notes
-- Runtime question text is never stored raw in analytics (hashed only).
-- Frontend runtime audit should use `npm audit --omit=dev` for production surface.
+- No raw user query text is persisted in analytics.
+- Keep all `.env` files private and never commit API keys.
 
-## Release Gates
-CI workflow runs:
-- frontend lint + build
-- backend import smoke check
-- offline pack integrity check
-- kiosk UI QA check
+## Collaboration
+- Branch strategy and team workflow: `docs/GITHUB_WORKFLOW.md`
+- Contribution process: `CONTRIBUTING.md`

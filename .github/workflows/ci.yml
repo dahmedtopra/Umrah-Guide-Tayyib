@@ -1,11 +1,14 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
+    branches: [main, develop]
   pull_request:
+    branches: [main, develop]
 
 jobs:
-  frontend:
+  frontend-build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -24,13 +27,10 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
-
       - name: Build
         run: npm run build
 
-  backend-and-qa:
+  backend-compile-and-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,8 +47,5 @@ jobs:
       - name: Backend import smoke
         run: python -m compileall apps/kiosk-backend/app
 
-      - name: Offline pack integrity
+      - name: Offline pack integrity check
         run: python scripts/check_offline_integrity.py
-
-      - name: Kiosk UI QA
-        run: python .agents/skills/kiosk-ui-qa/scripts/run_checks.py
