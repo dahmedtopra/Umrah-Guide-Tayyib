@@ -30,7 +30,7 @@ cd apps/kiosk-backend
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8005 --env-file ..\..\.env
+python -m uvicorn app.app:app --reload --port 8005 --env-file ..\..\.env
 ```
 
 Frontend:

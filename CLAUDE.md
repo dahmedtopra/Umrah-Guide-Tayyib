@@ -23,7 +23,7 @@
 
 ## Run Commands
 - Frontend: `cd apps/kiosk-frontend` ; `npm run dev -- --port 5175`
-- Backend: `cd apps/kiosk-backend` ; `uvicorn app.main:app --reload --port 8005`
+- Backend: `cd apps/kiosk-backend` ; `uvicorn app.app:app --reload --port 8005`
 - Ingest (from repo root):
   - `python scripts/ingest_sources.py --reset`
   - Or using backend venv: `apps/kiosk-backend/.venv/Scripts/python.exe scripts/ingest_sources.py --reset`
