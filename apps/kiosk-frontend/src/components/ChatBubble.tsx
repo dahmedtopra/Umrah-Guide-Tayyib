@@ -1,4 +1,4 @@
-import type { ChatMessage } from "./KioskFlow";
+﻿import type { ChatMessage } from "./KioskFlow";
 
 type ChatBubbleProps = {
   message: ChatMessage;
@@ -14,62 +14,75 @@ function escapeHtml(input: string): string {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
+    .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
+function labelsFor(lang: "EN" | "AR" | "FR") {
+  if (lang === "AR") {
+    return {
+      direct: "الاجابة المباشرة",
+      steps: "الخطوات",
+      mistakes: "اخطاء شائعة",
+    };
+  }
+  if (lang === "FR") {
+    return {
+      direct: "Reponse directe",
+      steps: "Etapes",
+      mistakes: "Erreurs courantes",
+    };
+  }
+  return {
+    direct: "Direct Answer",
+    steps: "Steps",
+    mistakes: "Common Mistakes",
+  };
+}
+
 function normalizeStructuredText(content: string, lang: "EN" | "AR" | "FR"): string {
-  const hasHeading = /^#{1,3}\s+/m.test(content);
-  if (hasHeading) return content;
-
-  const labels =
-    lang === "AR"
-      ? { direct: "الإجابة المباشرة", steps: "الخطوات", mistakes: "اخطاء شائعة" }
-      : lang === "FR"
-        ? { direct: "Reponse directe", steps: "Etapes", mistakes: "Erreurs courantes" }
-        : { direct: "Direct Answer", steps: "Steps", mistakes: "Common Mistakes" };
-
+  const labels = labelsFor(lang);
   let normalized = content.trim();
 
-  // Strip bold markers from section labels so they match the patterns below
   normalized = normalized.replace(
-    /\*\*(Direct Answer|Answer|Steps?|Common Mistakes|Reponse directe|Etapes|Erreurs courantes)\*\*/gi,
+    /\*\*(Direct Answer|Answer|Steps?|Common Mistakes|Reponse directe|Etapes|Erreurs courantes|الاجابة المباشرة|الخطوات|اخطاء شائعة)\*\*/gi,
     "$1",
   );
 
-  // Convert common inline section labels to markdown headings (colon optional).
+  normalized = normalized
+    .replace(/(^|\n)\s*#{1,3}\s*(Direct Answer|Answer)\s*:?/gim, `\n## ${labels.direct}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(Steps?|Step-by-step)\s*:?/gim, `\n## ${labels.steps}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(Common Mistakes|Mistakes to avoid)\s*:?/gim, `\n## ${labels.mistakes}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(Reponse directe)\s*:?/gim, `\n## ${labels.direct}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(Etapes)\s*:?/gim, `\n## ${labels.steps}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(Erreurs courantes)\s*:?/gim, `\n## ${labels.mistakes}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(الاجابة المباشرة)\s*:?/gim, `\n## ${labels.direct}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(الخطوات)\s*:?/gim, `\n## ${labels.steps}`)
+    .replace(/(^|\n)\s*#{1,3}\s*(اخطاء شائعة)\s*:?/gim, `\n## ${labels.mistakes}`);
+
   normalized = normalized
     .replace(/(^|\n)\s*(Direct Answer)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.direct}\n`)
-    .replace(/(^|\n)\s*(Answer)\s*:\s*/gi, `\n## ${labels.direct}\n`)
+    .replace(/(^|\n)\s*(Answer)\s*:\s*/gim, `\n## ${labels.direct}\n`)
     .replace(/(^|\n)\s*(Steps?|Step-by-step)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.steps}\n`)
     .replace(/(^|\n)\s*(Common Mistakes|Mistakes to avoid)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.mistakes}\n`)
     .replace(/(^|\n)\s*(Reponse directe)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.direct}\n`)
     .replace(/(^|\n)\s*(Etapes)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.steps}\n`)
-    .replace(/(^|\n)\s*(Erreurs courantes)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.mistakes}\n`);
+    .replace(/(^|\n)\s*(Erreurs courantes)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.mistakes}\n`)
+    .replace(/(^|\n)\s*(الاجابة المباشرة)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.direct}\n`)
+    .replace(/(^|\n)\s*(الخطوات)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.steps}\n`)
+    .replace(/(^|\n)\s*(اخطاء شائعة)\s*:?\s*(?=\n|$)/gim, `\n## ${labels.mistakes}\n`);
 
-  if (/^#{1,3}\s+/m.test(normalized)) {
-    return normalized.trim();
-  }
-
-  // Do not auto-split prose into pseudo-steps; preserve model sentence flow.
-  return normalized;
+  return normalized.trim();
 }
 
-/**
- * Pre-process raw LLM text so that markdown elements land on their own lines.
- * Handles the common case where the model streams "...some text.## Heading- bullet"
- * without any newlines between them.
- */
 function ensureMarkdownNewlines(raw: string): string {
   let text = raw;
-  // Insert newline before ## headings that aren't already at the start of a line
   text = text.replace(/([^\n])(\s*#{1,3}\s+)/g, "$1\n$2");
-  // Insert newline before bullet points (- ) that aren't at the start of a line
   text = text.replace(/([^\n])(- )/g, "$1\n$2");
-  // Insert newline before numbered list items (1. ) that aren't at the start of a line
   text = text.replace(/([^\n])(\d+\.\s)/g, "$1\n$2");
-  // Fix bare section labels (Direct Answer, Steps, Common Mistakes) that run into the next sentence
-  text = text.replace(/(Direct Answer|Common Mistakes|Steps)\s*(?=[A-Z])/g, "$1\n\n");
+  text = text
+    .replace(/(Direct Answer|Common Mistakes|Steps)\s*(?=[A-Z])/g, "$1\n\n")
+    .replace(/(الاجابة المباشرة|الخطوات|اخطاء شائعة)\s*(?=\S)/g, "$1\n\n");
   return text;
 }
 
@@ -152,8 +165,16 @@ function formatMessageContent(content: string, lang: "EN" | "AR" | "FR"): string
 export function ChatBubble({ message, isRTL, lang, onChipClick, onSourcesClick, onFeedbackThumb }: ChatBubbleProps) {
   const isUser = message.role === "user";
   const alignment = isUser ? (isRTL ? "justify-start" : "justify-end") : isRTL ? "justify-end" : "justify-start";
+  const yesText = lang === "AR" ? "نعم" : lang === "FR" ? "Oui" : "Yes";
+  const noText = lang === "AR" ? "لا" : lang === "FR" ? "Non" : "No";
+  const generalDisclaimer =
+    lang === "AR"
+      ? "ارشادات عامة - يرجى التحقق عبر القنوات الرسمية."
+      : lang === "FR"
+        ? "Conseils generaux - verifiez via les canaux officiels."
+        : "General guidance - verify with official channels.";
+  const sourcesLabel = lang === "AR" ? "المصادر" : lang === "FR" ? "Sources" : "Sources";
 
-  // Feedback message - special rendering with thumbs
   if (message.isFeedback) {
     return (
       <div className={`flex ${alignment}`}>
@@ -171,7 +192,7 @@ export function ChatBubble({ message, isRTL, lang, onChipClick, onSourcesClick, 
                 style={{ minHeight: "44px" }}
               >
                 <span className="text-lg">👍</span>
-                {lang === "AR" ? "نعم" : lang === "FR" ? "Oui" : "Yes"}
+                {yesText}
               </button>
               <button
                 className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-red-50 text-red-700 text-sm font-medium active:scale-95 transition-transform border border-red-200"
@@ -179,7 +200,7 @@ export function ChatBubble({ message, isRTL, lang, onChipClick, onSourcesClick, 
                 style={{ minHeight: "44px" }}
               >
                 <span className="text-lg">👎</span>
-                {lang === "AR" ? "لا" : lang === "FR" ? "Non" : "No"}
+                {noText}
               </button>
             </div>
           )}
@@ -209,7 +230,7 @@ export function ChatBubble({ message, isRTL, lang, onChipClick, onSourcesClick, 
 
         {!isUser && message.general_mode && !message.isStreaming && (
           <div className="mt-2 text-xs text-gold-800 bg-gold-50 rounded-lg px-2 py-1 border border-gold-200">
-            General guidance - verify with official channels.
+            {generalDisclaimer}
           </div>
         )}
 
@@ -219,7 +240,7 @@ export function ChatBubble({ message, isRTL, lang, onChipClick, onSourcesClick, 
             onClick={() => onSourcesClick(message.sources!)}
             style={{ minHeight: "32px" }}
           >
-            Sources ({message.sources.length})
+            {sourcesLabel} ({message.sources.length})
           </button>
         )}
 

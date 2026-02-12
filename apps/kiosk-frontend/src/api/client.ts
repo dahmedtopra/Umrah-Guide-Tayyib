@@ -12,13 +12,28 @@ export async function fetchSSE(
   onMeta: (meta: Record<string, unknown>) => void,
   onError: (err: Error) => void,
   signal?: AbortSignal,
+  timeoutMs = 20000,
 ): Promise<void> {
+  let timedOut = false;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, timeoutMs);
+  if (signal) {
+    if (signal.aborted) {
+      clearTimeout(timeout);
+      return;
+    }
+    signal.addEventListener("abort", () => controller.abort(), { once: true });
+  }
+
   try {
     const res = await fetch(`${baseUrl}${path}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
-      signal,
+      signal: controller.signal,
     });
     if (!res.ok) {
       throw new Error(`Chat request failed: ${res.status}`);
@@ -49,8 +64,15 @@ export async function fetchSSE(
       }
     }
   } catch (err) {
-    if (err instanceof DOMException && err.name === "AbortError") return;
+    if (err instanceof DOMException && err.name === "AbortError") {
+      if (timedOut) {
+        onError(new Error("Request timed out. Please try again."));
+      }
+      return;
+    }
     onError(err instanceof Error ? err : new Error(String(err)));
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

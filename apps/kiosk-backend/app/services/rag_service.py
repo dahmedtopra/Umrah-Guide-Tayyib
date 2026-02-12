@@ -23,13 +23,16 @@ _collection = None
 
 telemetry_disabled = os.getenv("CHROMA_TELEMETRY", "false").lower() in ("false", "0", "no")
 
+
+def _use_cloud() -> bool:
+  """Return True when all three Chroma Cloud env vars are set."""
+  return all(os.getenv(k) for k in ("CHROMA_API_KEY", "CHROMA_TENANT", "CHROMA_DATABASE"))
+
+
 def get_collection():
   global _client, _collection
   if _collection is not None:
     return _collection
-  chroma_path = get_chroma_path()
-  if not Path(chroma_path).exists():
-    return None
   try:
     import chromadb
   except Exception:
@@ -38,7 +41,17 @@ def get_collection():
     if telemetry_disabled:
       os.environ.setdefault("ANONYMIZED_TELEMETRY", "false")
       os.environ.setdefault("CHROMA_TELEMETRY", "false")
-    _client = chromadb.PersistentClient(path=chroma_path)
+    if _use_cloud():
+      _client = chromadb.CloudClient(
+        api_key=os.environ["CHROMA_API_KEY"],
+        tenant=os.environ["CHROMA_TENANT"],
+        database=os.environ["CHROMA_DATABASE"],
+      )
+    else:
+      chroma_path = get_chroma_path()
+      if not Path(chroma_path).exists():
+        return None
+      _client = chromadb.PersistentClient(path=chroma_path)
     _collection = _client.get_or_create_collection(name="umrah_sources")
     return _collection
   except Exception:
@@ -65,7 +78,8 @@ def embed_query(text: str) -> List[float]:
     "model": model,
     "input": [text]
   }
-  resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
+  # Keep retrieval latency kiosk-friendly; fail fast on network issues.
+  resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=(5, 12))
   resp.raise_for_status()
   data = resp.json()
   return data["data"][0]["embedding"]
@@ -99,6 +113,7 @@ def retrieve(query: str, lang: str, top_k: int = 5) -> Tuple[List[Dict[str, Any]
     results = collection.query(
       query_embeddings=[embedding],
       n_results=top_k,
+      where={"lang": lang},
       include=["documents", "metadatas", "distances"]
     )
   except Exception:
@@ -119,7 +134,7 @@ def retrieve(query: str, lang: str, top_k: int = 5) -> Tuple[List[Dict[str, Any]
     snippet = (doc or "")[:300]
     dist_val = dist if dist is not None else 1.0
     rel = relevance_label(dist_val)
-    score = max(0.0, min(1.0, 1.0 - dist_val))
+    score = max(0.0, min(1.0, 1.0 - (dist_val ** 2) / 2.0))
     sources.append({
       "source_id": meta.get("source_id", "") if meta else "",
       "title": meta.get("source_title", "") if meta else "",
@@ -141,7 +156,7 @@ def retrieve(query: str, lang: str, top_k: int = 5) -> Tuple[List[Dict[str, Any]
 
   confidence = 0.0
   if min_dist is not None:
-    confidence = max(0.0, min(1.0, 1.0 - min_dist))
+    confidence = max(0.0, min(1.0, 1.0 - (min_dist ** 2) / 2.0))
 
   _cache[key] = {"ts": now, "sources": sources, "confidence": confidence}
   return sources, confidence

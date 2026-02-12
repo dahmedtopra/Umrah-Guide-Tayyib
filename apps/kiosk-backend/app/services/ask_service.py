@@ -57,10 +57,10 @@ def clarifier(query: str, lang: str) -> str:
   q = (query or "").lower()
   if lang == "AR":
     if "الإحرام" in query or "ihram" in q:
-      return "هل تقصد أحكام الإحرام، أم عبور الميقات، أم ماذا تفعل إذا تجاوزت الميقات؟"
+      return "هل تقصد احكام الإحرام، ام عبور الميقات، ام ماذا تفعل اذا تجاوزت الميقات؟"
     if "الروضة" in query or "rawdah" in q:
-      return "هل تقصد حجز الروضة الشريفة أم قواعد الزيارة؟"
-    return "هل تقصد خطوة من خطوات العمرة، أم تصريح نسك، أم زيارة الروضة الشريفة؟"
+      return "هل تقصد حجز الروضة الشريفة ام قواعد الزيارة؟"
+    return "هل تقصد خطوة من خطوات العمرة، ام تصريح نسك، ام زيارة الروضة الشريفة؟"
   if lang == "FR":
     if "ihram" in q:
       return "Parlez-vous des regles de l'ihram, du passage du miqat, ou de quoi faire apres l'avoir depasse ?"
@@ -73,12 +73,11 @@ def clarifier(query: str, lang: str) -> str:
     return "Do you mean Rawdah booking or visit rules?"
   return "Do you mean an Umrah step, a Nusuk permit, or Rawdah visit details?"
 
-
 def clarifier_options(query: str, lang: str) -> List[str]:
   q = (query or "").lower()
   if lang == "AR":
     if "الإحرام" in query or "ihram" in q:
-      return ["أحكام الإحرام", "عبور الميقات", "تجاوز الميقات"]
+      return ["احكام الإحرام", "عبور الميقات", "تجاوز الميقات"]
     if "الروضة" in query or "rawdah" in q:
       return ["حجز الروضة الشريفة", "قواعد الزيارة", "وقت التصريح"]
     return ["خطوات العمرة", "تصريح نسك", "زيارة الروضة الشريفة"]
@@ -93,7 +92,6 @@ def clarifier_options(query: str, lang: str) -> List[str]:
   if "rawdah" in q:
     return ["Rawdah booking", "Visit rules", "Permit timing"]
   return ["Umrah steps", "Nusuk permit", "Rawdah visit"]
-
 
 def is_out_of_scope(query: str) -> bool:
   q = (query or "").lower()
@@ -112,17 +110,25 @@ def is_out_of_scope(query: str) -> bool:
     "hajj",
     "umrah visa",
     "employment",
+    "فيزا",
+    "تاشيرة",
+    "جواز",
+    "طبي",
+    "صحي",
+    "قانوني",
+    "الحج",
+    "visa omra",
+    "juridique",
+    "travail",
   ]
   return any(k in q for k in keywords)
 
-
 def out_of_scope_message(lang: str) -> str:
   if lang == "AR":
-    return "هذا الكشك مخصص لإرشادات العمرة ونسك والروضة الشريفة فقط."
+    return "هذا الكشك مخصص لارشادات العمرة ونسك والروضة الشريفة فقط."
   if lang == "FR":
     return "Ce kiosque couvre uniquement la Omra, Nusuk et la Rawdah."
   return "This kiosk covers Umrah, Nusuk, and Rawdah guidance only."
-
 
 def suggestion_chips(query: str, lang: str) -> List[str]:
   chips = get_suggestions(query, lang, limit=3)

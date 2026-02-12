@@ -92,3 +92,15 @@ def insert_analytics(
     conn.commit()
   finally:
     conn.close()
+
+
+def get_session_message_count(session_id: str, mode: str = "chat") -> int:
+  conn = sqlite3.connect(get_sqlite_path())
+  try:
+    row = conn.execute(
+      "SELECT COUNT(1) FROM analytics WHERE session_id = ? AND mode = ?",
+      (session_id, mode),
+    ).fetchone()
+    return int(row[0]) if row and row[0] is not None else 0
+  finally:
+    conn.close()

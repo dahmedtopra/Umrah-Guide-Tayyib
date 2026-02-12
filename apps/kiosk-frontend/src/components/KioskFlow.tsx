@@ -15,7 +15,6 @@ import type { TayyibState } from "../tayyib/loops";
 
 type FlowState =
   | "ATTRACT"
-  | "LANGUAGE_PICK"
   | "INTRO_WAVE"
   | "SEARCH_READY"
   | "CHAT"
@@ -68,6 +67,7 @@ export function KioskFlow() {
   const [lastConfidence, setLastConfidence] = useState<number | null>(null);
   const [sourcesDrawerOpen, setSourcesDrawerOpen] = useState(false);
   const [activeSources, setActiveSources] = useState<ChatMessage["sources"]>([]);
+  const [sessionLimitReached, setSessionLimitReached] = useState(false);
 
   // Logo compact animation (synced with IntroWave)
   const [logoCompacting, setLogoCompacting] = useState(false);
@@ -81,17 +81,23 @@ export function KioskFlow() {
   // Prevent loops - track if component is mounted
   const isMountedRef = useRef(false);
 
-  // Initialize session
-  useEffect(() => {
-    if (isMountedRef.current) return;
-    isMountedRef.current = true;
-
+  const ensureSession = () => {
     let sid = sessionStorage.getItem(SESSION_ID_KEY);
     if (!sid) {
       sid = crypto.randomUUID();
       sessionStorage.setItem(SESSION_ID_KEY, sid);
+    }
+    if (!sessionStorage.getItem(SESSION_START_KEY)) {
       sessionStorage.setItem(SESSION_START_KEY, Date.now().toString());
     }
+    return sid;
+  };
+
+  // Initialize session
+  useEffect(() => {
+    if (isMountedRef.current) return;
+    isMountedRef.current = true;
+    ensureSession();
   }, []);
 
   // Sync logo zoom-out with IntroWave (1500ms delay, same as INTRO_DURATION_MS)
@@ -105,7 +111,7 @@ export function KioskFlow() {
 
   // Inactivity monitoring (only after language is locked)
   useEffect(() => {
-    if (flow === "ATTRACT" || flow === "LANGUAGE_PICK" || flow === "INTRO_WAVE" || flow === "RESET") {
+    if (flow === "ATTRACT" || flow === "INTRO_WAVE" || flow === "RESET") {
       return;
     }
 
@@ -137,16 +143,17 @@ export function KioskFlow() {
     sessionStorage.removeItem(SESSION_ID_KEY);
     sessionStorage.removeItem(SESSION_START_KEY);
     sessionStorage.removeItem(LANG_LOCK_KEY);
+    ensureSession();
     setQuery("");
     setMessages([]);
     setIsStreaming(false);
     setSourcesDrawerOpen(false);
     setActiveSources([]);
+    setSessionLimitReached(false);
     setTimeout(() => setFlow("ATTRACT"), 0);
   };
 
-  const ensureLangLock = (next: "EN" | "AR" | "FR") => {
-    setLang(next);
+  const startIntro = () => {
     sessionStorage.setItem(LANG_LOCK_KEY, "1");
     setFlow("INTRO_WAVE");
   };
@@ -157,7 +164,7 @@ export function KioskFlow() {
 
   const submitChat = async (override?: string) => {
     const q = (typeof override === "string" ? override : query).trim();
-    if (!q || isStreaming) return;
+    if (!q || isStreaming || sessionLimitReached) return;
 
     setQuery("");
 
@@ -182,7 +189,7 @@ export function KioskFlow() {
       {
         lang,
         messages: history,
-        session_id: sessionStorage.getItem(SESSION_ID_KEY) || "",
+        session_id: ensureSession(),
       },
       // onToken
       (token) => {
@@ -198,6 +205,8 @@ export function KioskFlow() {
         const confidence = meta.confidence as number;
         const general = meta.general_mode as boolean | undefined;
         const isClarifier = !!meta.clarifying_question;
+        const errorCode = meta.error_code as string | undefined;
+        const isSessionLimit = errorCode === "session_limit_reached";
 
         const updated = (prev: ChatMessage[]) =>
           prev.map((m) =>
@@ -206,7 +215,10 @@ export function KioskFlow() {
               : m
           );
 
-        if (isClarifier) {
+        if (isSessionLimit) {
+          setSessionLimitReached(true);
+          setMessages(updated);
+        } else if (isClarifier) {
           // Don't ask "was this helpful?" after a clarifying question
           setMessages(updated);
         } else {
@@ -250,7 +262,7 @@ export function KioskFlow() {
 
     // Submit to backend (thumbs up = 5, thumbs down = 2)
     try {
-      const session_id = sessionStorage.getItem(SESSION_ID_KEY) || "";
+      const session_id = ensureSession();
       const start = Number(sessionStorage.getItem(SESSION_START_KEY) || Date.now());
       const time_on_screen_ms = Date.now() - start;
       await fetchJSON("/api/feedback", {
@@ -298,6 +310,35 @@ export function KioskFlow() {
       <div className="h-full w-full relative flex items-center justify-center overflow-hidden"
         style={{ background: "linear-gradient(135deg, #0b4a3a 0%, #156f58 50%, #0f5a46 100%)" }}>
         {logoElement}
+
+        <div className="absolute left-8 top-32 z-[85]" dir="ltr">
+          <div className="grid grid-cols-3 gap-2 rounded-full bg-black/20 p-1 backdrop-blur-sm">
+            <button
+              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${
+                lang === "EN" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
+              }`}
+              onClick={() => setLang("EN")}
+            >
+              EN
+            </button>
+            <button
+              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${
+                lang === "AR" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
+              }`}
+              onClick={() => setLang("AR")}
+            >
+              AR
+            </button>
+            <button
+              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${
+                lang === "FR" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
+              }`}
+              onClick={() => setLang("FR")}
+            >
+              FR
+            </button>
+          </div>
+        </div>
 
         {/* Islamic geometry overlay */}
         <div className="islamic-geo" />
@@ -368,7 +409,7 @@ export function KioskFlow() {
             {/* Purpose title */}
             <AnimatedContent delay={0.3} duration={1} distance={30} threshold={0}>
               <div className="text-xl md:text-2xl font-semibold text-gold-300 uppercase tracking-widest">
-                Umrah Guidance
+                {t.attractTitle}
               </div>
             </AnimatedContent>
 
@@ -404,125 +445,13 @@ export function KioskFlow() {
                   <div className="absolute -inset-4 rounded-full border-2 border-gold-400/40 animate-pulse" style={{ pointerEvents: "none" }} />
                   <button
                     className="relative px-12 py-5 rounded-full bg-gold-500 text-emerald-900 text-xl font-bold shadow-glow hover:bg-gold-400 transition-all hover:scale-105 active:scale-95"
-                    onClick={() => setFlow("LANGUAGE_PICK")}
+                    onClick={startIntro}
                     style={{ minHeight: "60px" }}
                   >
-                    Tap to Begin
+                    {t.tapToStart}
                   </button>
                 </div>
               </ClickSpark>
-            </AnimatedContent>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // LANGUAGE_PICK Screen
-  if (flow === "LANGUAGE_PICK") {
-    return (
-      <div className="h-full w-full relative flex items-center justify-center overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0b4a3a 0%, #156f58 50%, #0f5a46 100%)" }}>
-        {logoElement}
-
-        {/* Islamic geometry overlay */}
-        <div className="islamic-geo" />
-
-        {/* MetaBalls ambient layer */}
-        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ pointerEvents: "none" }}>
-          <MetaBalls
-            color="#156f58"
-            cursorBallColor="#d4a92a"
-            speed={0.15}
-            ballCount={12}
-            clumpFactor={0.8}
-            cursorBallSize={2}
-            animationSize={25}
-            enableTransparency={true}
-            enableMouseInteraction={false}
-          />
-        </div>
-
-        {/* Premium ambient light - top glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at 50% 20%, rgba(212, 169, 42, 0.15) 0%, transparent 50%)`,
-          }}
-        />
-
-        {/* Premium ambient light - center glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 60%)`,
-          }}
-        />
-
-        {/* Subtle shimmer overlay for depth */}
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{
-            background: `
-              linear-gradient(125deg, transparent 40%, rgba(212, 169, 42, 0.1) 50%, transparent 60%),
-              radial-gradient(circle at 30% 40%, rgba(212, 169, 42, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 70% 60%, rgba(47, 169, 135, 0.06) 0%, transparent 50%)
-            `,
-          }}
-        />
-
-        {/* Vignette - darker edges for cinematic depth */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%)`,
-          }}
-        />
-
-        <div className="relative z-10 w-full h-full flex items-center justify-center">
-          <div className="w-full max-w-3xl flex flex-col items-center gap-8 text-center px-8">
-            <AnimatedContent delay={0} duration={1} distance={30} threshold={0}>
-              <div className="text-3xl md:text-4xl font-semibold text-white mb-4">
-                {t.chooseLanguage || "Choose Your Language"}
-              </div>
-            </AnimatedContent>
-
-            <AnimatedContent delay={0.3} duration={1} distance={20} threshold={0}>
-              <StarBorder color="#d4a92a" starCount={30} speed={4}>
-                <div className="rounded-3xl px-8 py-8 bg-white/10 backdrop-blur-md border-2 border-gold-400/30">
-                  <div className="flex items-center justify-center gap-6 flex-wrap">
-                    <ClickSpark color="#d4a92a">
-                      <button
-                        className="px-10 py-5 rounded-2xl border-2 border-gold-400 bg-white/20 text-white text-2xl font-bold hover:bg-white/30 transition-colors"
-                        onClick={() => ensureLangLock("EN")}
-                        style={{ minWidth: "140px", minHeight: "70px" }}
-                      >
-                        English
-                      </button>
-                    </ClickSpark>
-
-                    <ClickSpark color="#d4a92a">
-                      <button
-                        className="px-10 py-5 rounded-2xl border-2 border-gold-400 bg-white/20 text-white text-2xl font-bold hover:bg-white/30 transition-colors"
-                        onClick={() => ensureLangLock("AR")}
-                        style={{ minWidth: "140px", minHeight: "70px" }}
-                      >
-                        العربية
-                      </button>
-                    </ClickSpark>
-
-                    <ClickSpark color="#d4a92a">
-                      <button
-                        className="px-10 py-5 rounded-2xl border-2 border-gold-400 bg-white/20 text-white text-2xl font-bold hover:bg-white/30 transition-colors"
-                        onClick={() => ensureLangLock("FR")}
-                        style={{ minWidth: "140px", minHeight: "70px" }}
-                      >
-                        Français
-                      </button>
-                    </ClickSpark>
-                  </div>
-                </div>
-              </StarBorder>
             </AnimatedContent>
           </div>
         </div>
@@ -671,7 +600,7 @@ export function KioskFlow() {
                 className="min-h-[44px] px-5 py-2 rounded-2xl border border-red-300/60 bg-red-50/80 text-red-700 text-sm font-medium active:scale-[0.98] transition-transform"
                 onClick={handleReset}
               >
-                End Session
+                {t.endSession}
               </button>
             </div>
           </div>
@@ -705,14 +634,14 @@ export function KioskFlow() {
                   placeholder={t.chatPlaceholder}
                   className="w-full rounded-2xl border border-gold-200/60 bg-white/90 backdrop-blur-sm pl-4 pr-4 py-3 text-sm text-emerald-950 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   style={{ minHeight: "48px" }}
-                  disabled={isStreaming}
+                  disabled={isStreaming || sessionLimitReached}
                 />
               </div>
               <ClickSpark color="#d4a92a" sparkCount={6}>
                 <button
                   className="min-h-[48px] px-5 rounded-2xl bg-emerald-800 text-white text-sm font-medium shadow-soft active:scale-[0.98] transition-transform disabled:opacity-50"
                   onClick={() => submitChat()}
-                  disabled={isStreaming || !query.trim()}
+                  disabled={isStreaming || sessionLimitReached || !query.trim()}
                 >
                   {t.sendButton}
                 </button>
@@ -722,17 +651,22 @@ export function KioskFlow() {
                   className="min-h-[48px] px-4 rounded-2xl border border-red-300/60 bg-red-50/80 text-red-700 text-sm font-medium active:scale-[0.98] transition-transform"
                   onClick={handleReset}
                 >
-                  End
+                  {t.endSession}
                 </button>
               </ClickSpark>
             </div>
+            {sessionLimitReached && (
+              <div className="max-w-2xl mx-auto mt-2 text-xs text-gold-100/95">
+                {t.sessionLimitReached}
+              </div>
+            )}
           </div>
         </div>
       )}
 
       {/* Sources drawer */}
       {sourcesDrawerOpen && activeSources && activeSources.length > 0 && (
-        <div className="fixed inset-0 bg-black/50 z-40 flex items-end justify-center md:items-center md:justify-end" onClick={() => setSourcesDrawerOpen(false)}>
+        <div className="fixed inset-0 bg-black/50 z-40 flex items-end justify-center md:items-center md:justify-end" dir="ltr" onClick={() => setSourcesDrawerOpen(false)}>
           <div
             className="glass w-full max-w-2xl max-h-[70vh] md:max-h-full md:h-full md:w-[480px] rounded-t-3xl md:rounded-none overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
@@ -744,7 +678,7 @@ export function KioskFlow() {
                 onClick={() => setSourcesDrawerOpen(false)}
                 style={{ minHeight: "44px" }}
               >
-                Close
+                {t.closeButton}
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-6 space-y-3 sources-scroll">
@@ -778,7 +712,7 @@ export function KioskFlow() {
 
       {isDebug && (
         <div className="fixed top-4 right-4 z-50 glass rounded-2xl p-3 text-xs text-gray-700 space-y-1 max-w-md">
-          <div className="font-bold text-emerald-800">DEBUG OVERLAY</div>
+          <div className="font-bold text-emerald-800">{t.debugOverlay}</div>
           <div>state: {flow}</div>
           <div>api: {API_BASE_URL}</div>
           <div>messages: {messages.length}</div>
@@ -790,4 +724,3 @@ export function KioskFlow() {
     </div>
   );
 }
-

@@ -12,6 +12,35 @@ def repo_root() -> Path:
   return Path(__file__).resolve().parents[1]
 
 
+# ---------------------------------------------------------------------------
+# Auto-load .env so the script works outside the backend venv / IDE
+# ---------------------------------------------------------------------------
+def _load_dotenv() -> None:
+  env_path = repo_root() / ".env"
+  if not env_path.exists():
+    return
+  try:
+    from dotenv import load_dotenv
+    load_dotenv(env_path, override=True)
+    return
+  except ImportError:
+    pass
+  # Manual fallback when python-dotenv is not installed
+  for line in env_path.read_text(encoding="utf-8").splitlines():
+    line = line.strip()
+    if not line or line.startswith("#"):
+      continue
+    if "=" not in line:
+      continue
+    key, _, value = line.partition("=")
+    key = key.strip()
+    value = value.strip().strip("\"'")
+    if key and key not in os.environ:
+      os.environ[key] = value
+
+_load_dotenv()
+
+
 def load_sources() -> List[Dict]:
   path = repo_root() / "data" / "rag_corpus" / "sources.yml"
   if not path.exists():
@@ -162,6 +191,11 @@ def get_chroma_path() -> str:
   return os.getenv("CHROMA_PATH", str(default_path))
 
 
+def _use_cloud() -> bool:
+  """Return True when all three Chroma Cloud env vars are set."""
+  return all(os.getenv(k) for k in ("CHROMA_API_KEY", "CHROMA_TENANT", "CHROMA_DATABASE"))
+
+
 def ingest_chunks(collection, src_id: str, title: str, url_or_path: str, lang: str, approved_by: str, approved_date: str, chunks: List[str], batch_size: int, page: Optional[int] = None, page_label: Optional[str] = None, page_start: Optional[int] = None, page_end: Optional[int] = None) -> int:
   total = 0
   for i in range(0, len(chunks), batch_size):
@@ -220,9 +254,19 @@ def main() -> int:
       except Exception:
         pass
 
-  chroma_path = get_chroma_path()
-  Path(chroma_path).mkdir(parents=True, exist_ok=True)
-  client = chromadb.PersistentClient(path=chroma_path)
+  if _use_cloud():
+    client = chromadb.CloudClient(
+      api_key=os.environ["CHROMA_API_KEY"],
+      tenant=os.environ["CHROMA_TENANT"],
+      database=os.environ["CHROMA_DATABASE"],
+    )
+    chroma_path = "(cloud)"
+    print(f"Using Chroma Cloud  tenant={os.environ['CHROMA_TENANT']}  db={os.environ['CHROMA_DATABASE']}")
+  else:
+    chroma_path = get_chroma_path()
+    Path(chroma_path).mkdir(parents=True, exist_ok=True)
+    client = chromadb.PersistentClient(path=chroma_path)
+    print(f"Using local Chroma  path={chroma_path}")
   collection = client.get_or_create_collection(name="umrah_sources")
   if args.reset:
     try:

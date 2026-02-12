@@ -6,6 +6,7 @@ type Lang = "EN" | "AR" | "FR";
 type Dict = {
   greeting: string;
   attractPrompt: string;
+  attractTitle: string;
   tapToStart: string;
   chooseLanguage: string;
   searchReadyPrompt: string;
@@ -14,6 +15,9 @@ type Dict = {
   searchPlaceholder: string;
   searchButton: string;
   clearButton: string;
+  closeButton: string;
+  endSession: string;
+  debugOverlay: string;
   poseCta: string;
   searchingStages: [string, string, string];
   quickChips: string[];
@@ -63,6 +67,7 @@ type Dict = {
   feedbackMoreQuestion: string;
   feedbackYesThumb: string;
   feedbackNoThumb: string;
+  sessionLimitReached: string;
 };
 
 type LangContextValue = {
@@ -75,6 +80,7 @@ const DICT: Record<Lang, Dict> = {
   EN: {
     greeting: "Ask about Umrah steps, Procedure and Guidance",
     attractPrompt: "Official Umrah guidance, ready to help.",
+    attractTitle: "Umrah Guidance",
     tapToStart: "Tap to begin",
     chooseLanguage: "Choose language",
     searchReadyPrompt: "Tap a topic or type a question",
@@ -83,6 +89,9 @@ const DICT: Record<Lang, Dict> = {
     searchPlaceholder: "Search official guidance...",
     searchButton: "Search",
     clearButton: "Clear",
+    closeButton: "Close",
+    endSession: "End Session",
+    debugOverlay: "Debug Overlay",
     poseCta: "Pose with Tayyib",
     searchingStages: ["Finding sources…", "Reading…", "Writing…"],
     quickChips: [
@@ -141,11 +150,13 @@ const DICT: Record<Lang, Dict> = {
     feedbackHelpQuestion: "Did that answer help you?",
     feedbackMoreQuestion: "Is there anything else about Umrah I can help with?",
     feedbackYesThumb: "Yes",
-    feedbackNoThumb: "No"
+    feedbackNoThumb: "No",
+    sessionLimitReached: "Session limit reached (15 messages). Tap End to start a new session."
   },
   AR: {
-    greeting: "اسأل عن خطوات العمرة والإجراءات والإرشادات",
-    attractPrompt: "إرشادات رسمية للعمرة لمساعدتك.",
+    greeting: "اسال عن خطوات العمرة والاجراءات والارشادات",
+    attractPrompt: "ارشاد رسمي للعمرة لمساعدتك.",
+    attractTitle: "ارشاد العمرة",
     tapToStart: "اضغط للبدء",
     chooseLanguage: "اختر اللغة",
     searchReadyPrompt: "اختر موضوعا أو اكتب سؤالا",
@@ -154,6 +165,9 @@ const DICT: Record<Lang, Dict> = {
     searchPlaceholder: "ابحث في الإرشادات الرسمية...",
     searchButton: "بحث",
     clearButton: "مسح",
+    closeButton: "اغلاق",
+    endSession: "انهاء الجلسة",
+    debugOverlay: "لوحة التشخيص",
     poseCta: "التقط صورة مع طيب",
     searchingStages: ["جار العثور على المصادر…", "جار القراءة…", "جار الكتابة…"],
     quickChips: [
@@ -212,11 +226,13 @@ const DICT: Record<Lang, Dict> = {
     feedbackHelpQuestion: "هل كانت هذه الإجابة مفيدة؟",
     feedbackMoreQuestion: "هل هناك أي شيء آخر عن العمرة يمكنني مساعدتك به؟",
     feedbackYesThumb: "نعم",
-    feedbackNoThumb: "لا"
+    feedbackNoThumb: "لا",
+    sessionLimitReached: "وصلت الجلسة إلى الحد الأقصى (15 رسالة). اضغط إنهاء للبدء من جديد."
   },
   FR: {
     greeting: "Posez des questions sur les étapes, procédures et conseils de la Omra",
     attractPrompt: "Guidance officielle pour la Omra, prête a aider.",
+    attractTitle: "Guide Omra",
     tapToStart: "Touchez pour commencer",
     chooseLanguage: "Choisir la langue",
     searchReadyPrompt: "Touchez un sujet ou saisissez une question",
@@ -225,6 +241,9 @@ const DICT: Record<Lang, Dict> = {
     searchPlaceholder: "Rechercher une guidance officielle...",
     searchButton: "Rechercher",
     clearButton: "Effacer",
+    closeButton: "Fermer",
+    endSession: "Fin de session",
+    debugOverlay: "Panneau debug",
     poseCta: "Pose avec Tayyib",
     searchingStages: ["Recherche des sources…", "Lecture…", "Redaction…"],
     quickChips: [
@@ -283,7 +302,8 @@ const DICT: Record<Lang, Dict> = {
     feedbackHelpQuestion: "Cette reponse vous a-t-elle aide ?",
     feedbackMoreQuestion: "Y a-t-il autre chose sur la Omra avec laquelle je peux vous aider ?",
     feedbackYesThumb: "Oui",
-    feedbackNoThumb: "Non"
+    feedbackNoThumb: "Non",
+    sessionLimitReached: "Limite de session atteinte (15 messages). Touchez Fin pour recommencer."
   }
 };
 
