@@ -1,4 +1,4 @@
-# ICHS Umrah AI Search Kiosk
+# ICCD Umrah AI Search Kiosk
 
 Production-oriented kiosk monorepo for Umrah guidance.
 
