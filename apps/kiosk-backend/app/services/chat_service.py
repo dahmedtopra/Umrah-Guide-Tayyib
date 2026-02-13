@@ -413,7 +413,12 @@ def stream_chat_response(payload: ChatRequest) -> Generator[str, None, None]:
         _log_analytics(payload, "offline", offline_conf, len(filtered), None, latency_ms, latest_query)
         return
 
-    sources_raw, rag_conf = retrieve(rag_query, payload.lang, top_k=5)
+    try:
+      print("Retreiving relevant results")
+      sources_raw, rag_conf = retrieve(rag_query, payload.lang, top_k=5)
+      print("Results retreived successfully from ChromDB!")
+    except Exception as e:
+      print("Some error occured while retreiving results")
     sources_raw = [s for s in sources_raw if s.get("score", 0) >= MIN_SOURCE_SCORE]
     confidence = rag_conf
 

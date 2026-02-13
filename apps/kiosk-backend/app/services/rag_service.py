@@ -94,6 +94,7 @@ def relevance_label(distance: float) -> str:
 
 
 def retrieve(query: str, lang: str, top_k: int = 5) -> Tuple[List[Dict[str, Any]], float]:
+  print("retrieve called")
   key = f"{lang}:{query}"
   now = time.time()
   cached = _cache.get(key)
@@ -159,4 +160,5 @@ def retrieve(query: str, lang: str, top_k: int = 5) -> Tuple[List[Dict[str, Any]
     confidence = max(0.0, min(1.0, 1.0 - (min_dist ** 2) / 2.0))
 
   _cache[key] = {"ts": now, "sources": sources, "confidence": confidence}
+  
   return sources, confidence

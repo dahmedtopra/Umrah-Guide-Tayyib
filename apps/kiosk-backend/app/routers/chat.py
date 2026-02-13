@@ -6,9 +6,9 @@ from app.services.chat_service import stream_chat_response
 
 router = APIRouter()
 
-
 @router.post("/chat")
 async def chat(payload: ChatRequest):
+  print("new request")
   return StreamingResponse(
     stream_chat_response(payload),
     media_type="text/event-stream",
