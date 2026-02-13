@@ -49,6 +49,19 @@ function normalizeStructuredText(content: string, lang: "EN" | "AR" | "FR"): str
     "$1",
   );
 
+  // If the model emits "Direct Answer <text>" on one line, split it into:
+  // "## Direct Answer" + body on next line.
+  normalized = normalized
+    .replace(/(^|\n)\s*#{0,3}\s*(Direct Answer|Answer)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.direct}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(Steps?|Step-by-step)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.steps}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(Common Mistakes|Mistakes to avoid)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.mistakes}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(Reponse directe)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.direct}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(Etapes)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.steps}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(Erreurs courantes)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.mistakes}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(الاجابة المباشرة)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.direct}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(الخطوات)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.steps}\n${p3}`)
+    .replace(/(^|\n)\s*#{0,3}\s*(اخطاء شائعة)\s*:?\s+([^\n]+)/gim, (_m, p1, _p2, p3) => `${p1}## ${labels.mistakes}\n${p3}`);
+
   normalized = normalized
     .replace(/(^|\n)\s*#{1,3}\s*(Direct Answer|Answer)\s*:?/gim, `\n## ${labels.direct}`)
     .replace(/(^|\n)\s*#{1,3}\s*(Steps?|Step-by-step)\s*:?/gim, `\n## ${labels.steps}`)
@@ -81,7 +94,7 @@ function ensureMarkdownNewlines(raw: string): string {
   text = text.replace(/([^\n])(- )/g, "$1\n$2");
   text = text.replace(/([^\n])(\d+\.\s)/g, "$1\n$2");
   text = text
-    .replace(/(Direct Answer|Common Mistakes|Steps)\s*(?=[A-Z])/g, "$1\n\n")
+    .replace(/(Direct Answer|Common Mistakes|Steps)\s*:?\s*(?=[A-Z])/g, "$1\n\n")
     .replace(/(الاجابة المباشرة|الخطوات|اخطاء شائعة)\s*(?=\S)/g, "$1\n\n");
   return text;
 }

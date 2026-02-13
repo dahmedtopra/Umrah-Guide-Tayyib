@@ -9,13 +9,24 @@ from typing import Dict, List, Optional, Tuple
 from app.services.hash_service import hash_query
 
 
-def get_repo_root() -> Path:
-  return Path(__file__).resolve().parents[4]
-
-
 def get_offline_pack_path() -> str:
-  default_path = get_repo_root() / "data" / "offline_pack" / "offline_pack.json"
-  return os.getenv("OFFLINE_PACK_PATH", str(default_path))
+  env_val = os.getenv("OFFLINE_PACK_PATH")
+  if env_val:
+    return env_val
+  # Try common locations: repo root (local dev) then app root (container)
+  here = Path(__file__).resolve().parent
+  candidates = [
+    here.parents[3] / "data" / "offline_pack" / "offline_pack.json",  # local: repo root
+    here.parents[1] / "data" / "offline_pack" / "offline_pack.json",  # container: /app/
+    Path.cwd() / "data" / "offline_pack" / "offline_pack.json",
+  ]
+  for p in candidates:
+    try:
+      if p.exists():
+        return str(p)
+    except Exception:
+      continue
+  return str(candidates[0])
 
 
 def normalize(text: str) -> str:

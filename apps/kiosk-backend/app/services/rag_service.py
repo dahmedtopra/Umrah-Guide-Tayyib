@@ -5,13 +5,23 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 
-def get_repo_root() -> Path:
-  return Path(__file__).resolve().parents[4]
-
-
 def get_chroma_path() -> str:
-  default_path = get_repo_root() / "data" / "chroma_index"
-  return os.getenv("CHROMA_PATH", str(default_path))
+  env_val = os.getenv("CHROMA_PATH")
+  if env_val:
+    return env_val
+  here = Path(__file__).resolve().parent
+  candidates = [
+    here.parents[3] / "data" / "chroma_index",  # local: repo root
+    here.parents[1] / "data" / "chroma_index",  # container: /app/
+    Path.cwd() / "data" / "chroma_index",
+  ]
+  for p in candidates:
+    try:
+      if p.exists():
+        return str(p)
+    except Exception:
+      continue
+  return str(candidates[0])
 
 
 _cache = {}
