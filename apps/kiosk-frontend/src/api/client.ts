@@ -29,6 +29,7 @@ export async function fetchSSE(
   }
 
   try {
+    console.log(`Called ${baseUrl}${path}`)
     const res = await fetch(`${baseUrl}${path}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

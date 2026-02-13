@@ -183,7 +183,6 @@ export function KioskFlow() {
 
     const abort = new AbortController();
     abortRef.current = abort;
-
     await fetchSSE(
       "/api/chat",
       {
@@ -314,25 +313,22 @@ export function KioskFlow() {
         <div className="absolute left-8 top-32 z-[85]" dir="ltr">
           <div className="grid grid-cols-3 gap-2 rounded-full bg-black/20 p-1 backdrop-blur-sm">
             <button
-              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${
-                lang === "EN" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
-              }`}
+              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${lang === "EN" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
+                }`}
               onClick={() => setLang("EN")}
             >
               EN
             </button>
             <button
-              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${
-                lang === "AR" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
-              }`}
+              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${lang === "AR" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
+                }`}
               onClick={() => setLang("AR")}
             >
               AR
             </button>
             <button
-              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${
-                lang === "FR" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
-              }`}
+              className={`h-11 w-16 rounded-full text-sm font-semibold transition-colors ${lang === "FR" ? "bg-gold-400 text-emerald-950" : "bg-white/20 text-white hover:bg-white/30"
+                }`}
               onClick={() => setLang("FR")}
             >
               FR
